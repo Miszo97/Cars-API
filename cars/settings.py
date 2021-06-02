@@ -25,7 +25,7 @@ SECRET_KEY = os.environ["CARS_SECRET_KEY"]
 
 DEBUG = DEBUG = (os.getenv('CARS_DEBUG', 'False') == 'True')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
