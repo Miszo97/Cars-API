@@ -1,12 +1,12 @@
 # Create your views here.
 
 from django.db.models.aggregates import Count
-from rest_framework import mixins, status, viewsets
-from rest_framework.decorators import action
+from rest_framework import generics, mixins, status, viewsets
 from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from cars_api.models import Car
-from cars_api.serializers import CarSerializer
+from cars_api.serializers import CarSerializer, RateSerializer
 
 
 class CarViewSet(mixins.DestroyModelMixin, viewsets.GenericViewSet):
@@ -22,11 +22,16 @@ class CarViewSet(mixins.DestroyModelMixin, viewsets.GenericViewSet):
         ser = CarSerializer(data=request.data)
         if ser.is_valid():
             ser.save()
-            return Response(ser.data)
-        return Response(ser.error_messages, status=status.HTTP_400_BAD_REQUEST)
+            return Response(ser.data, status=status.HTTP_201_CREATED)
+        return Response(ser.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    @action(detail=False)
-    def popular(self, request):
+
+class RateView(generics.CreateAPIView):
+    serializer_class = RateSerializer
+
+
+class PopularView(APIView):
+    def get(self, request):
         n_most_pulular_cars = Car.objects.annotate(num_rates=Count("rates")).order_by(
             "-num_rates"
         )[:2]
