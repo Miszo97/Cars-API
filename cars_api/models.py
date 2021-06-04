@@ -3,11 +3,11 @@ from django.db.models.aggregates import Avg
 
 
 class Car(models.Model):
-    car_make = models.CharField(max_length=100)
+    make = models.CharField(max_length=100)
     model = models.CharField(max_length=100)
 
     def __str__(self):
-        return self.car_make + " " + self.model
+        return self.make + " " + self.model
 
     def average_rate(self):
         return self.rates.all().aggregate(Avg("rate_number"))["rate_number__avg"]
