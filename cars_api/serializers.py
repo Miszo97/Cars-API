@@ -1,16 +1,24 @@
 from rest_framework import serializers
+from rest_framework.validators import UniqueTogetherValidator
+
+from cars_api.helpers import exists_in_nhtsa
 
 from .models import Car, Rate
 
 
-def car_exists_in_ntfs(make, model):
-    return True
-
-
 class CarSerializer(serializers.Serializer):
-    id = serializers.IntegerField()
+    id = serializers.IntegerField(required=False)
     make = serializers.CharField(max_length=100)
     model = serializers.CharField(max_length=100)
+
+    class Meta:
+        validators = [
+            UniqueTogetherValidator(
+                queryset=Car.objects.all(),
+                fields=['make', 'model'],
+                message='This car already exists in the databse'
+            )
+        ]
 
     def validate(self, data):
         """
@@ -24,7 +32,7 @@ class CarSerializer(serializers.Serializer):
             raise serializers.ValidationError(
                 "the request post should contain make and model fields")
 
-        if not car_exists_in_ntfs(make, model):
+        if not exists_in_nhtsa(make, model):
             raise serializers.ValidationError("Such car does not exist")
 
         return data
@@ -33,7 +41,7 @@ class CarSerializer(serializers.Serializer):
         return Car.objects.create(**validated_data)
 
     def to_representation(self, instance):
-        """ Add addictional fields """
+        """ Add additional fields """
 
         ret = super().to_representation(instance)
 
@@ -49,9 +57,10 @@ class CarSerializer(serializers.Serializer):
 class RateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Rate
+        fields = '__all__'
 
-    def validate_rate_number(self, value):
-        if not (isinstance(value, int) and value >= 0 and value <= 5):
+    def validate_rating(self, value):
+        if not (value >= 1 and value <= 5):
             raise serializers.ValidationError(
-                "Please provide an integer from the range 0 to 5")
+                "Please provide an integer from the range 1 to 5")
         return value
