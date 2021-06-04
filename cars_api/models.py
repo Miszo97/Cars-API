@@ -10,16 +10,16 @@ class Car(models.Model):
         return self.make + " " + self.model
 
     def average_rate(self):
-        return self.rates.all().aggregate(Avg("rate_number"))["rate_number__avg"]
+        return self.rates.all().aggregate(Avg("rating"))["rating__avg"]
 
     def rates_number(self):
         return self.rates.count()
 
 
 class Rate(models.Model):
-    rate_number = models.PositiveIntegerField()
-    rated_car = models.ForeignKey(
+    rating = models.PositiveIntegerField()
+    car_id = models.ForeignKey(
         Car, related_name="rates", on_delete=models.CASCADE)
 
     def __str__(self):
-        return str(self.rate_number) + " " + str(self.rated_car)
+        return str(self.rating) + " " + str(self.car_id)
