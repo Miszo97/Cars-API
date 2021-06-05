@@ -139,7 +139,7 @@ class RateViewTestCase(APITestCase):
 
     def test_rate_not_existing_car(self):
         """
-        Test if the view returns HTTP_400_BAD_REQUEST status code if someone tries a not existing car
+        Test if the view returns HTTP_400_BAD_REQUEST status code if someone tries to send a not existing car
         """
 
         url = reverse('cars_api:rate')
