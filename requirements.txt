@@ -1,4 +1,6 @@
 django
 djangorestframework
 django-extensions
+gunicorn
+django-on-heroku
 requests
