@@ -9,7 +9,7 @@ class Car(models.Model):
     def __str__(self):
         return self.make + " " + self.model
 
-    def average_rate(self):
+    def avg_rating(self):
         return self.rates.all().aggregate(Avg("rating"))["rating__avg"]
 
     def rates_number(self):
