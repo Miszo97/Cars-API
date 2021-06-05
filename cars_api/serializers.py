@@ -37,12 +37,8 @@ class CarSerializer(serializers.Serializer):
         Check if provided correct data and if the car exists
         """
 
-        try:
-            make = data['make']
-            model = data['model']
-        except KeyError:
-            raise serializers.ValidationError(
-                "the request post should contain make and model fields")
+        make = data['make']
+        model = data['model']
 
         if not exists_in_nhtsa(make, model):
             raise serializers.ValidationError("Such car does not exist")
