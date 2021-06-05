@@ -10,6 +10,8 @@ class CarSerializer(serializers.Serializer):
     id = serializers.IntegerField(required=False)
     make = serializers.CharField(max_length=100)
     model = serializers.CharField(max_length=100)
+    avg_rating = serializers.FloatField(required=False)
+    rate_numbers = serializers.IntegerField(required=False)
 
     class Meta:
         validators = [
@@ -40,18 +42,28 @@ class CarSerializer(serializers.Serializer):
     def create(self, validated_data):
         return Car.objects.create(**validated_data)
 
-    def to_representation(self, instance):
-        """ Add additional fields """
-
-        ret = super().to_representation(instance)
-
+    def __init__(self, *args, **kwargs):
+        # initialize fields
+        super(CarSerializer, self).__init__(*args, **kwargs)
+        # now modify the creditcard field
         if 'avg_rating' in self.context:
-            ret['avg_rating'] = instance.average_rate()
+            self.fields['avg_rating'] = 4
 
         if 'rates_number' in self.context:
-            ret['rates_number'] = instance.rates_number()
+            self.fields['rates_number'] = 7
 
-        return ret
+    # def to_representation(self, instance):
+    #     """ Add additional fields """
+
+    #     ret = super().to_representation(instance)
+
+    #     if 'avg_rating' in self.context:
+    #         ret['avg_rating'] = instance.average_rate()
+
+    #     if 'rates_number' in self.context:
+    #         ret['rates_number'] = instance.rates_number()
+
+    #     return ret
 
 
 class RateSerializer(serializers.ModelSerializer):
