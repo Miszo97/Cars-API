@@ -15,7 +15,7 @@ class CarViewSet(mixins.DestroyModelMixin, viewsets.GenericViewSet):
 
     def list(self, request):
         ser = self.serializer_class(
-            self.queryset, many=True, context={'avg_rating': True})
+            self.get_queryset(), many=True, context={'avg_rating': True})
         return Response(ser.data)
 
     def create(self, request):
