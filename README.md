@@ -30,19 +30,19 @@ You can download it using your favorite packet manager:
 
 ### Showing all existing cars:
 ```
-$ http http://127.0.0.1:8000/api/cars
+http http://127.0.0.1:8000/api/cars
 ```
 
 ### Showing the most popular cars:
 You can show the most popular cars (based on number of rates)
 
 ```
-$ http http://127.0.0.1:8000/api/popular
+http http://127.0.0.1:8000/api/popular
 ```
 
 ### Adding a new car:
 ```
-$ http http://127.0.0.1:8000/api/cars make='Tesla' model='Model 3'
+http http://127.0.0.1:8000/api/cars make='Tesla' model='Model 3'
 ```
 
 ### Rating a car:
@@ -50,7 +50,7 @@ $ http http://127.0.0.1:8000/api/cars make='Tesla' model='Model 3'
 You can rate an existing car with number ranging from 1 to 5
 
 ```
-$ http http://127.0.0.1:8000/api/rate car_id=1, rating=5
+http http://127.0.0.1:8000/api/rate car_id=1, rating=5
 ```
 
 ### Deleting a car:
@@ -58,30 +58,30 @@ $ http http://127.0.0.1:8000/api/rate car_id=1, rating=5
 You can delete a car with the http delete method
 
 ```
-$ http DELETE http://127.0.0.1:8000/api/cars/1
+http DELETE http://127.0.0.1:8000/api/cars/1
 ```
 
 # Setup and installation
 
 Clone the repo:
 ```
-$ git clone https://github.com/Miszo97/Cars-API
-$ cd Cars
+git clone https://github.com/Miszo97/Cars-API
+cd Cars-API
 ```
 
 Create a virtual environment and activate it:
 ```
-$ python3 -m venv env
-$ source env/bin/activate
+python3 -m venv env
+source env/bin/activate
 ```
 Install dependencies:
 ```
-$ pip install -r requirements.txt
+pip install -r requirements.txt
 ```
 
 Apply migrations:
 ```
-$ python manage.py migrate
+python manage.py migrate
 ```
 Export enviroment variables
 
@@ -92,7 +92,7 @@ export CARS_DEBUG=True
 
 Finally run the server:
 ```
-$ python manage.py runserver
+python manage.py runserver
 ```
 
 Start playing with the API 🙌🏻
