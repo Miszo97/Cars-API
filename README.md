@@ -11,7 +11,10 @@ http https://shrouded-tor-45074.herokuapp.com/api/cars
 ```
 ### Or use a docker image:
 ```
-docker pull kol478/cars-api
+docker run \
+-e CARS_SECRET_KEY=$CARS_SECRET_KEY \
+-e CARS_DEBUG=False \
+kol478/cars-api -dp 8000:8000
 ```
 
 
@@ -50,6 +53,14 @@ You can rate an existing car with number ranging from 1 to 5
 $ http http://127.0.0.1:8000/api/rate car_id=1, rating=5
 ```
 
+### Deleting a car:
+
+You can delete a car with the http delete method
+
+```
+$ http DELETE http://127.0.0.1:8000/api/cars/1
+```
+
 # Setup and installation
 
 Clone the repo:
@@ -72,6 +83,13 @@ Apply migrations:
 ```
 $ python manage.py migrate
 ```
+Export enviroment variables
+
+```
+export CARS_SECRET_KEY='your-secret-key' \
+export CARS_DEBUG=True
+```
+
 Finally run the server:
 ```
 $ python manage.py runserver
