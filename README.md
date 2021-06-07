@@ -50,7 +50,7 @@ http http://127.0.0.1:8000/api/cars make='Tesla' model='Model 3'
 You can rate an existing car with number ranging from 1 to 5
 
 ```
-http http://127.0.0.1:8000/api/rate car_id=1, rating=5
+http http://127.0.0.1:8000/api/rate car_id=1 rating=5
 ```
 
 ### Deleting a car:
