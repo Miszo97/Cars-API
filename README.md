@@ -13,8 +13,8 @@ http https://shrouded-tor-45074.herokuapp.com/api/cars
 ```
 docker run \
 -e CARS_SECRET_KEY=$CARS_SECRET_KEY \
--e CARS_DEBUG=False \
-kol478/cars-api -dp 8000:8000
+-e CARS_DEBUG=True \
+-dp 8000:8000 kol478/cars-api
 ```
 
 
