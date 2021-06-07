@@ -7,7 +7,7 @@ from .models import Car, Rate
 
 
 class CarSerializer(serializers.Serializer):
-    id = serializers.IntegerField(required=False)
+    id = serializers.IntegerField(required=False, read_only=True)
     make = serializers.CharField(max_length=100)
     model = serializers.CharField(max_length=100)
     avg_rating = serializers.FloatField(required=False)
