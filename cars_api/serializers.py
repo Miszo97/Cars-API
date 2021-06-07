@@ -10,7 +10,8 @@ class CarSerializer(serializers.Serializer):
     id = serializers.IntegerField(required=False, read_only=True)
     make = serializers.CharField(max_length=100)
     model = serializers.CharField(max_length=100)
-    avg_rating = serializers.FloatField(required=False)
+    avg_rating = serializers.DecimalField(
+        required=False, max_digits=None, decimal_places=1)
     rates_number = serializers.IntegerField(required=False)
 
     def __init__(self, *args, **kwargs):
