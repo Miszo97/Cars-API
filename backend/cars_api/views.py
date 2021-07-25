@@ -1,12 +1,11 @@
 # Create your views here.
 
+from cars_api.models import Car
+from cars_api.serializers import CarSerializer, RateSerializer
 from django.db.models.aggregates import Count
 from rest_framework import generics, mixins, status, viewsets
 from rest_framework.response import Response
 from rest_framework.views import APIView
-
-from cars_api.models import Car
-from cars_api.serializers import CarSerializer, RateSerializer
 
 
 class CarViewSet(mixins.DestroyModelMixin, viewsets.GenericViewSet):

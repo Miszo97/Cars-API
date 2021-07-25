@@ -1,11 +1,10 @@
 # Create your tests here.
 import json
 
+from cars_api.models import Car, Rate
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
-
-from cars_api.models import Car, Rate
 
 
 class CarViewSetTestCase(APITestCase):

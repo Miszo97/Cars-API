@@ -1,7 +1,6 @@
+from cars_api.views import CarViewSet, PopularView, RateView
 from django.urls import path
 from rest_framework import routers
-
-from cars_api.views import CarViewSet, PopularView, RateView
 
 app_name = 'cars_api'
 
